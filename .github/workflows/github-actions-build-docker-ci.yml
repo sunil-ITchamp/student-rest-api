@@ -31,3 +31,5 @@ jobs:
       run: mvn -B package
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag khatri27/student-rest-service:$(date +%s)
+    - name: Build and Publish Docker Image
+      run: docker push khatri27/student-rest-service:$(date +%s)

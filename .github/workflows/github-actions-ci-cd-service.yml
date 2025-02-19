@@ -2,12 +2,9 @@ name: student-rest-service
 
 on:
   push:
-    paths:
-      - student-rest-api/**
-    branches:
-      - 'main'
+    branches: ["master"]
   pull_request:
-    branches: [master]
+    branches: ["master"]
 
 jobs:
   build:

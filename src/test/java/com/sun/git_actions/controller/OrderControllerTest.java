@@ -42,14 +42,27 @@ class OrderControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(content().string("{\"id\":3,\"name\":\"Thomas\"}"))
-                //.andExpect(content().contentTypeCompatibleWith("application/json"))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.ALL))
-                .andExpect( jsonPath("$.id", is(3)))
-                .andExpect( jsonPath("$.name", is("Thomas")));
-//                .andExpect(content().json("{\n" +
-//                        "    \"id\": 3,\n" +
-//                        "    \"name\": \"Thomas\"\n" +
-//                        "}") );
+                .andExpect(jsonPath("$.id", is(3)))
+                .andExpect(jsonPath("$.name", is("Thomas")));
 
     }
+
+    @Test
+    void shouldAdd2ndStudent() throws Exception {
+        Student newStudent = new Student(4L, "Michael");
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/students")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(newStudent))
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andExpect(content().json("{\n" +
+                        "    \"id\": 4,\n" +
+                        "    \"name\": \"Michael\"\n" +
+                        "}"));
+
+    }
+
 }

@@ -27,10 +27,8 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: 'maven'
-    - name: Make Maven wrapper executable
-      run: chmod +x mvnw
 
     - name: Build with Maven
-      run: ./mvnw -ntp verify
+      run: mvn -B package --file pom.xml
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag khatri27/student-rest-service:$(date +%s)
